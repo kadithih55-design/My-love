@@ -1,0 +1,703 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #fff5f7;
+    color: #4b2731;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   INTRO SCREEN
+========================= */
+
+.intro {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 30px;
+
+    background:
+        radial-gradient(circle at top left, #ffdce5, transparent 40%),
+        radial-gradient(circle at bottom right, #f7d5df, transparent 40%),
+        #fff5f7;
+
+    position: relative;
+}
+
+
+.intro-content {
+    max-width: 700px;
+
+    animation: fadeUp 1.5s ease;
+}
+
+
+.small-text {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+
+    color: #b66a7b;
+
+    margin-bottom: 25px;
+}
+
+
+.intro h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(45px, 8vw, 85px);
+
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    color: #7d3046;
+
+    margin-bottom: 25px;
+}
+
+
+.intro-message {
+    font-size: 16px;
+
+    color: #77505a;
+
+    margin-bottom: 35px;
+}
+
+
+.open-btn,
+.surprise-btn {
+    border: none;
+
+    background: #8f3f56;
+
+    color: white;
+
+    padding: 16px 30px;
+
+    border-radius: 50px;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow: 0 12px 30px rgba(143, 63, 86, 0.25);
+}
+
+
+.open-btn:hover,
+.surprise-btn:hover {
+    transform: translateY(-4px);
+
+    background: #702d42;
+
+    box-shadow: 0 18px 35px rgba(143, 63, 86, 0.35);
+}
+
+
+/* =========================
+   LETTER SECTION
+========================= */
+
+.letter-section {
+    min-height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 100px 20px;
+
+    background: #f9e7eb;
+
+    position: relative;
+}
+
+
+/* =========================
+   ENVELOPE
+========================= */
+
+.envelope {
+    width: 330px;
+
+    height: 220px;
+
+    position: relative;
+
+    cursor: pointer;
+
+    margin-bottom: 50px;
+
+    transition: 1s;
+}
+
+
+.envelope-body {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background: #b95770;
+
+    border-radius: 5px;
+
+    box-shadow: 0 20px 45px rgba(100, 35, 55, 0.25);
+
+    overflow: hidden;
+}
+
+
+.envelope-body::before,
+.envelope-body::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+
+    width: 0;
+    height: 0;
+
+    border-style: solid;
+
+    z-index: 2;
+}
+
+
+.envelope-body::before {
+    left: 0;
+
+    border-width: 110px 165px 0 0;
+
+    border-color: #a94e67 transparent transparent transparent;
+}
+
+
+.envelope-body::after {
+    right: 0;
+
+    border-width: 0 165px 110px 0;
+
+    border-color: transparent #a94e67 transparent transparent;
+}
+
+
+.envelope-top {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 0;
+    height: 0;
+
+    border-left: 165px solid transparent;
+
+    border-right: 165px solid transparent;
+
+    border-top: 120px solid #ce7187;
+
+    z-index: 5;
+
+    transform-origin: top;
+
+    transition: 0.8s;
+}
+
+
+.letter-preview {
+    position: absolute;
+
+    width: 220px;
+    height: 145px;
+
+    background: #fffaf5;
+
+    left: 55px;
+    top: 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-family: "DM Serif Display", serif;
+
+    color: #8f3f56;
+
+    font-size: 24px;
+
+    z-index: 1;
+
+    transition: 1s;
+}
+
+
+.envelope.open .envelope-top {
+    transform: rotateX(180deg);
+
+    z-index: 0;
+}
+
+
+.envelope.open .letter-preview {
+    transform: translateY(-100px);
+}
+
+
+/* =========================
+   ACTUAL LETTER
+========================= */
+
+.letter {
+    max-width: 700px;
+
+    width: 100%;
+
+    background: #fffaf5;
+
+    padding: 60px;
+
+    border-radius: 5px;
+
+    box-shadow: 0 25px 70px rgba(85, 35, 50, 0.15);
+
+    opacity: 0;
+
+    transform: translateY(50px);
+
+    pointer-events: none;
+
+    transition: 1s;
+
+    line-height: 1.9;
+
+    font-size: 15px;
+
+    color: #573740;
+}
+
+
+.letter.show {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+
+.letter-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    font-size: 12px;
+
+    letter-spacing: 2px;
+
+    color: #b27684;
+
+    margin-bottom: 50px;
+}
+
+
+.dear {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 30px;
+
+    color: #8f3f56;
+
+    margin-bottom: 25px;
+}
+
+
+.letter p {
+    margin-bottom: 22px;
+}
+
+
+.letter strong {
+    color: #8f3f56;
+}
+
+
+.highlight {
+    text-align: center;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 42px;
+
+    color: #8f3f56;
+
+    margin: 40px 0 !important;
+}
+
+
+.signature {
+    text-align: center;
+
+    margin-top: 50px;
+
+    padding-top: 40px;
+
+    border-top: 1px solid #edd5dc;
+}
+
+
+.signature p:first-child {
+    font-size: 17px;
+
+    color: #8f3f56;
+}
+
+
+.signature h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 42px;
+
+    font-weight: 400;
+
+    color: #7d3046;
+}
+
+
+.signature h3 {
+    font-size: 18px;
+
+    font-weight: 400;
+
+    color: #a55a6d;
+
+    margin-top: 5px;
+}
+
+
+.love {
+    margin-top: 30px;
+
+    font-family: "DM Serif Display", serif;
+
+    font-size: 25px;
+
+    color: #8f3f56;
+}
+
+
+/* =========================
+   SURPRISE BUTTON
+========================= */
+
+.surprise-btn {
+    margin-top: 45px;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform: translateY(20px);
+
+    transition: 0.8s;
+}
+
+
+.surprise-btn.show {
+    opacity: 1;
+
+    pointer-events: auto;
+
+    transform: translateY(0);
+}
+
+
+/* =========================
+   FINAL SURPRISE
+========================= */
+
+.surprise {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    padding: 40px;
+
+    background:
+        radial-gradient(circle at center, #7d3046, #431b29);
+
+    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+.surprise-content {
+    animation: fadeUp 1.5s ease;
+
+    max-width: 650px;
+}
+
+
+.big-heart {
+    font-size: 65px;
+
+    animation: heartbeat 1.5s infinite;
+
+    margin-bottom: 30px;
+}
+
+
+.surprise .small-text {
+    color: #e8b9c5;
+}
+
+
+.surprise h1 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: clamp(55px, 9vw, 90px);
+
+    font-weight: 400;
+
+    margin-bottom: 25px;
+}
+
+
+.surprise h2 {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 35px;
+
+    font-weight: 400;
+
+    line-height: 1.4;
+
+    color: #f4ccd5;
+}
+
+
+.forever {
+    margin-top: 40px;
+
+    font-size: 16px;
+
+    letter-spacing: 1px;
+
+    color: #f2d9df;
+}
+
+
+.infinity {
+    font-size: 75px;
+
+    margin: 15px 0;
+
+    color: #f6bdcb;
+}
+
+
+.final-line {
+    font-family: "DM Serif Display", serif;
+
+    font-size: 28px;
+
+    margin-top: 25px;
+}
+
+
+/* =========================
+   FLOATING HEARTS
+========================= */
+
+.heart {
+    position: fixed;
+
+    bottom: -30px;
+
+    font-size: 18px;
+
+    opacity: 0.6;
+
+    pointer-events: none;
+
+    animation: floatHeart linear forwards;
+
+    z-index: 100;
+}
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp {
+
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes heartbeat {
+
+    0% {
+        transform: scale(1);
+    }
+
+    25% {
+        transform: scale(1.15);
+    }
+
+    50% {
+        transform: scale(1);
+    }
+
+    75% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+@keyframes floatHeart {
+
+    from {
+        transform: translateY(0) rotate(0deg);
+
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.7;
+    }
+
+    to {
+        transform: translateY(-110vh) rotate(360deg);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .intro {
+        padding: 25px;
+    }
+
+    .intro h1 {
+        font-size: 48px;
+    }
+
+    .intro-message {
+        font-size: 14px;
+    }
+
+    .envelope {
+        width: 290px;
+        height: 195px;
+    }
+
+    .envelope-top {
+        border-left-width: 145px;
+        border-right-width: 145px;
+        border-top-width: 105px;
+    }
+
+    .envelope-body::before {
+        border-width: 98px 145px 0 0;
+    }
+
+    .envelope-body::after {
+        border-width: 0 145px 98px 0;
+    }
+
+    .letter-preview {
+        width: 190px;
+        height: 130px;
+
+        left: 50px;
+        top: 30px;
+    }
+
+    .letter {
+        padding: 35px 25px;
+
+        font-size: 14px;
+    }
+
+    .highlight {
+        font-size: 34px;
+    }
+
+    .signature h2 {
+        font-size: 35px;
+    }
+
+    .surprise {
+        padding: 25px;
+    }
+
+    .surprise h1 {
+        font-size: 55px;
+    }
+
+    .surprise h2 {
+        font-size: 28px;
+    }
+
+}
